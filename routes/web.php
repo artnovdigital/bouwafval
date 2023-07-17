@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index']);
+Route::post('/login/', [App\Http\Controllers\FrontendController::class, 'login']);
+Route::get('/logout', [App\Http\Controllers\FrontendController::class, 'logout']);
+
 Route::get('/addco/', [App\Http\Controllers\FrontendController::class, 'addco']);
 Route::post('/addco/', [App\Http\Controllers\FrontendController::class, 'addcoPost']);
 Route::get('/company/{id}', [App\Http\Controllers\FrontendController::class, 'detail']);
@@ -27,3 +30,5 @@ Route::get('/image/{id}', [App\Http\Controllers\FrontendController::class, 'imag
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+

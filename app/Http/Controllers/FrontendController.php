@@ -4,16 +4,66 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 
 
 class FrontendController extends Controller
 {
+    
+    protected $user;
+
+
+    public function __construct() {
+
+        if( Session::has('user')) {
+            $this->user = Session::get('user');
+            //die("ýou are logged in");
+        }
+        else{
+            echo ("ýou are not logged in");
+            $this->user  = false;
+        }
+
+    }
+
     public function index(){
         $companies=Company::orderBy("name")->get();
-        return view("home", ["companies"=>$companies]);
+
+        
+
+        return view("home", ["user"=>$this->user,"companies"=>$companies]);
                 // dd($companies);
+    }
+
+    public function login(Request $request){
+        $company=Company::where("email", "=", $request->get('email'))->first();
+        if (!$company) {
+            return Redirect::back()->withErrors(['msg' => 'Email is wrong']);
+        } 
+        // dd($company);
+        // die( $company->password . "and " .  md5($request->get('password')) );
+        if ($company->password != md5($request->get('password'))) {
+            return Redirect::back()->withErrors(['msg' => 'Wrong password']);
+        }
+
+        Session::put('user', $company);
+
+       // return Redirect::back();
+       //return redirect('/');
+
+        $companies=Company::orderBy("name")->get();
+
+        return view("home", ["user"=>$company, "companies"=>$companies]);
+                // dd($companies);
+    }
+
+    public function logout() {
+        Session::destroy();
+
+        return redirect('/');
     }
 
     public function detail($id){
