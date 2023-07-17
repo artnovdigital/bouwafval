@@ -1,0 +1,9 @@
+/node_modules
+.env
+public/companies/*
+/storage/*.key
+vendor/*
+
+
+
+

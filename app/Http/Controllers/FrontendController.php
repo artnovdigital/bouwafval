@@ -38,9 +38,17 @@ class FrontendController extends Controller
         $file = $request->file('logo');
         $extension = $request->file('logo')->extension();
 
-        $upload = Storage::put("companies/" . $company->id . "." . $extension, $file);
+        $destinationPath = public_path()."/storage/companies/";
+
+        $image_name = $company->id . "." . $extension;
+        $file->move($destinationPath, $image_name);
+
+        // $upload = Storage::put("companies/" . $company->id . "." . $extension, $file);
         
-        dd($upload);
+
+        $company->logo = "companies/".$image_name;
+
+        //dd($upload);
         $company->save();
 
         return view("addco");
