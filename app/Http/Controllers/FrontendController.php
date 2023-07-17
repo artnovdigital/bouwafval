@@ -38,7 +38,7 @@ class FrontendController extends Controller
         $file = $request->file('logo');
         $extension = $request->file('logo')->extension();
 
-        $destinationPath = public_path()."/storage/companies/";
+        $destinationPath = public_path().DIRECTORY_SEPARATOR."storage" . DIRECTORY_SEPARATOR . "companies" . DIRECTORY_SEPARATOR;
 
         $image_name = $company->id . "." . $extension;
         $file->move($destinationPath, $image_name);
