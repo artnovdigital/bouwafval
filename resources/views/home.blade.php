@@ -9,6 +9,32 @@
         align-items: flex-start;
         justify-content: space-evenly;
     }
+
+    li.companies {
+        display: flex;
+        width: 100%;
+        list-style: none;
+        justify-content: space-between;
+    }
+
+    li.companies a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    li.companies a:hover {
+        text-decoration: underline;
+        transition: 200ms;
+    }
+
+    .karmaLevel button {
+        width: 25px;
+        height: 25px;
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+
     </style>
 
 @stop
@@ -43,7 +69,13 @@
 <ul class="compList" id='compList'>
     @foreach($companies as $company)
 
-    <li class="companies"><a href="/company/{{$company->id}}">{{$company->name}}</a></li>
+    <li class="companies"><a href="/company/{{$company->id}}">{{$company->name}}</a>
+    <div class="karmaLevel">
+        <button id='plusKarma'>+</button>
+        <span class="karmaRate">0</span>
+        <button id='minusKarma'>-</button>
+    </div>
+    </li>
     
     @endforeach
 </ul>
