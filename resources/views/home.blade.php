@@ -1,7 +1,15 @@
 @extends('layouts.default')
 
 @section('extraHead')
-    <style></style>
+    <style>
+    .homeContent {
+        display: flex;
+        position: relative;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: space-evenly;
+    }
+    </style>
 
 @stop
 
@@ -25,8 +33,8 @@
 @endif
 
 
-
-
+<div class="homeContent">
+<div class="companiesList">
 <h1>These are our respected companies</h1>
 <ul class="compList">
     @foreach($companies as $company)
@@ -36,7 +44,8 @@
     @endforeach
 </ul>
 <!--ul>li{Company}.companies$@*5-->
-
+</div>
+<div class="loginForm">
 <h1>Login Form</h1>
 <form method="POST" action="/login" name="loginForm" onsubmit="return validateForm()">
   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -59,5 +68,7 @@
 @if($errors->any())
 <h4 style="color:red;">{{$errors->first()}}</h4>
 @endif
+</div>
+</div>
 
 @stop

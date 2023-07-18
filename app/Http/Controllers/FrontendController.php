@@ -23,7 +23,7 @@ class FrontendController extends Controller
 
         
         $user = session('user');
-        // dump($user);
+        dump($user);
 
         return view("home", ["user"=>$user,"companies"=>$companies]);
                 // dd($companies);
