@@ -1,6 +1,7 @@
 /node_modules
 .env
 public/companies/*
+storage/companies/*
 /storage/*.key
 vendor/*
 

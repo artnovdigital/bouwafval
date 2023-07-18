@@ -13,46 +13,38 @@ use Intervention\Image\ImageManager;
 class FrontendController extends Controller
 {
     
-    protected $user;
+   
 
 
-    public function __construct() {
-
-        if( Session::has('user')) {
-            $this->user = Session::get('user');
-            //die("ýou are logged in");
-        }
-        else{
-            echo ("ýou are not logged in");
-            $this->user  = false;
-        }
-
-    }
 
     public function index(){
         $companies=Company::orderBy("name")->get();
 
         
+        $user = session('user');
+        // dump($user);
 
-        return view("home", ["user"=>$this->user,"companies"=>$companies]);
+        return view("home", ["user"=>$user,"companies"=>$companies]);
                 // dd($companies);
     }
+
+
 
     public function login(Request $request){
         $company=Company::where("email", "=", $request->get('email'))->first();
         if (!$company) {
             return Redirect::back()->withErrors(['msg' => 'Email is wrong']);
         } 
-        // dd($company);
-        // die( $company->password . "and " .  md5($request->get('password')) );
+        
         if ($company->password != md5($request->get('password'))) {
             return Redirect::back()->withErrors(['msg' => 'Wrong password']);
         }
 
-        Session::put('user', $company);
+        // set the session
+        session(['user' => $company]);
 
        // return Redirect::back();
-       //return redirect('/');
+       return redirect('/');
 
         $companies=Company::orderBy("name")->get();
 
@@ -60,8 +52,9 @@ class FrontendController extends Controller
                 // dd($companies);
     }
 
-    public function logout() {
-        Session::destroy();
+    public function logout(Request $request) {
+        
+        $request->session()->forget('user');
 
         return redirect('/');
     }
