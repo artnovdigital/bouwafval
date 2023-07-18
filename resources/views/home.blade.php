@@ -71,9 +71,9 @@
 
     <li class="companies"><a href="/company/{{$company->id}}">{{$company->name}}</a>
     <div class="karmaLevel">
-        <button id='plusKarma'>+</button>
-        <span class="karmaRate">0</span>
-        <button id='minusKarma'>-</button>
+        <button class='plusKarma' data-id={{$company->id}} >+</button>
+        <span class="karmaRate" data-id={{$company->id}} >{{$company->karma}}</span>
+        <button class='minusKarma' data-id={{$company->id}} >-</button>
     </div>
     </li>
     

@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/recipes', [App\Http\Controllers\ReciptController::class, 'index']);
+Route::get('/recipes/{id}', [App\Http\Controllers\ReciptController::class, 'detail']);
+
+
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index']);
 Route::post('/login/', [App\Http\Controllers\FrontendController::class, 'login']);
 Route::get('/logout', [App\Http\Controllers\FrontendController::class, 'logout']);
@@ -22,6 +27,8 @@ Route::post('/addco/', [App\Http\Controllers\FrontendController::class, 'addcoPo
 Route::get('/company/{id}', [App\Http\Controllers\FrontendController::class, 'detail']);
 
 Route::get('/getAjaxCompanies', [App\Http\Controllers\FrontendController::class, 'getAjaxCompanies']);
+Route::post('/postKarma', [App\Http\Controllers\FrontendController::class, 'postKarma']);
+
 
 Route::get('/image/{id}', [App\Http\Controllers\FrontendController::class, 'image']);
 

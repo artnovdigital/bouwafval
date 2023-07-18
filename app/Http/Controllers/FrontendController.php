@@ -114,6 +114,30 @@ class FrontendController extends Controller
         return $companies->toJson();
     }
 
+    public function postKarma(Request $request) {
+
+        $company=Company::where("id", "=", $request->get('id'))->first();
+        if(!$company) {
+            die('no such company');
+        }
+        $value = $request->get('value');
+        
+        if($value =="+") {
+            $company->karma = $company->karma + 1;
+
+        }
+        if($value =="-") {
+            $company->karma = $company->karma - 1;
+            
+        }
+        $company->save();
+        return Response::json(array(
+            'code'      =>  200,
+            'message'   =>  "ok"
+        ), 200);
+
+    }
+
     public function image($id){
         $waterMarkUrl = public_path('img/watermark.png');
         $company=Company::where("id", "=", $id)->first();
