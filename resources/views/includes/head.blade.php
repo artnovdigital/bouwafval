@@ -10,21 +10,57 @@
 
 $( document ).ready(function() {
 
-    $.ajax({
-          url : "/getAjaxCompanies",
-          type: "GET",
-          //data : formData,
-          success: function(data, textStatus, jqXHR)
-          {
-            console.log('ok');
-          },
-          error: function (jqXHR, textStatus, errorThrown)
-          {
-            console.log('error');
 
-          }
+    $( "#refreshButton" ).click(function() {
+
+
+        var search = $("#search").val();
+
+        console.log(search);
+
+        $.ajax({
+            url : "/getAjaxCompanies?search=" + search,
+            type: "GET",
+            //data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+                data = JSON.parse(data);
+
+                $( "#compList" ).empty();
+
+                $.each(data, function(k, v) {
+                    // console.log(v);
+
+                    // console.log(v.name);
+                    $("#compList").append('<li><a href="/company/' + v.id + '">' + v.name + '</a></li>');
+
+                });
+
+
+
+                // data.each(function(index, value) {
+
+                //     console.log(value);
+
+                //     //$("#compList").append('<li><a href="#">' + dataaaaaaaaaaa</a></li>');
+
+                // });
+
+                // console.log(data);
+
+                //$("#compList").append('<li><a href="#">' + dataaaaaaaaaaa</a></li>');
+
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log('error');
+
+            }
 
         });
+    });
 
 });
 

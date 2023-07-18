@@ -23,7 +23,7 @@ class FrontendController extends Controller
 
         
         $user = session('user');
-        dump($user);
+        // dump($user);
 
         return view("home", ["user"=>$user,"companies"=>$companies]);
                 // dd($companies);
@@ -97,9 +97,12 @@ class FrontendController extends Controller
         return view("addco");
     }
 
-    public function getAjaxCompanies()
+    public function getAjaxCompanies(Request $request)
     {
-        $companies=Company::orderBy("name")->get();
+
+        $companies=Company::where('name', 'LIKE', '%'.$request->get('search').'%')
+            ->orderBy("name")            
+            ->get();
 
 
         // return Response::json(array(

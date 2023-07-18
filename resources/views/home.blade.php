@@ -36,7 +36,11 @@
 <div class="homeContent">
 <div class="companiesList">
 <h1>These are our respected companies</h1>
-<ul class="compList">
+
+<input type='text' name='search' id='search' value='weird'>
+<button id='refreshButton'>Refresh</button>
+
+<ul class="compList" id='compList'>
     @foreach($companies as $company)
 
     <li class="companies"><a href="/company/{{$company->id}}">{{$company->name}}</a></li>
