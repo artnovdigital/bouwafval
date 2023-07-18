@@ -20,6 +20,9 @@ Route::get('/logout', [App\Http\Controllers\FrontendController::class, 'logout']
 Route::get('/addco/', [App\Http\Controllers\FrontendController::class, 'addco']);
 Route::post('/addco/', [App\Http\Controllers\FrontendController::class, 'addcoPost']);
 Route::get('/company/{id}', [App\Http\Controllers\FrontendController::class, 'detail']);
+
+Route::get('/getAjaxCompanies', [App\Http\Controllers\FrontendController::class, 'getAjaxCompanies']);
+
 Route::get('/image/{id}', [App\Http\Controllers\FrontendController::class, 'image']);
 
 // Route::get('/', function () {

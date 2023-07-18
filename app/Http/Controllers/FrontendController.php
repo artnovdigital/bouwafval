@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -55,7 +56,6 @@ class FrontendController extends Controller
     public function logout(Request $request) {
         
         $request->session()->forget('user');
-
         return redirect('/');
     }
 
@@ -95,6 +95,20 @@ class FrontendController extends Controller
         $company->save();
 
         return view("addco");
+    }
+
+    public function getAjaxCompanies()
+    {
+        $companies=Company::orderBy("name")->get();
+
+
+        // return Response::json(array(
+        //     'code'      =>  404,
+        //     'message'   =>  "not found"
+        // ), 404);
+
+
+        return $companies->toJson();
     }
 
     public function image($id){
