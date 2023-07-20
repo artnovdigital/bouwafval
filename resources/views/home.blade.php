@@ -76,6 +76,12 @@
         <button class='minusKarma' data-id={{$company->id}} >-</button>
     </div>
     </li>
+
+        @foreach($company->recepies as $recepe)
+
+            - {{$recepe->name}}<br>
+
+        @endforeach
     
     @endforeach
 </ul>

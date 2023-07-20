@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/storages', [App\Http\Controllers\StorageController::class, 'index']);
 
 Route::get('/recipes', [App\Http\Controllers\ReciptController::class, 'index']);
 Route::get('/recipes/{id}', [App\Http\Controllers\ReciptController::class, 'detail']);
+Route::get('/recepeadd/', [App\Http\Controllers\ReciptController::class, 'recepeAdd']);
+Route::post('/recepeadd/', [App\Http\Controllers\ReciptController::class, 'recepeAddPost']);
+Route::post('/recepeDelete/', [App\Http\Controllers\ReciptController::class, 'recepeDelete']);
 
 
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index']);

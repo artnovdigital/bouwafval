@@ -19,9 +19,18 @@ class FrontendController extends Controller
 
 
     public function index(){
-        $companies=Company::orderBy("name")->get();
+        $companies=Company::with('recepies')->orderBy("name")->get();
 
-        
+        dd($companies);    
+
+        foreach($companies as $company) {
+
+            echo $company->name . "<br>";
+            dump($company->recepies);
+
+        }
+        die('ready');
+
         $user = session('user');
         // dump($user);
 

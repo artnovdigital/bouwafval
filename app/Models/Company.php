@@ -25,4 +25,10 @@ class Company extends Model
 
     }
 
+
+    public function recepies()
+    {
+        return $this->hasMany(Recipe::class);
+    }
+
 }
